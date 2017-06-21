@@ -1,0 +1,22 @@
+﻿@model PruebaGetVehiculos.ViewModel.VehiculosViewModel
+
+
+@{
+    ViewBag.Title = "ElijoAuto";
+}
+
+
+<h2>ElijoAuto</h2>
+
+@using (Html.BeginForm("Traer", "Home"))
+{
+    <div class="form-group">
+
+        @Html.LabelFor(v => v.Cliente.VehiculoPrincipalId)
+        @Html.DropDownListFor(v => v.Cliente.VehiculoPrincipalId, new SelectList(Model.Vehiculos, "VehiculoId", "Modelo"), "Seleccione Auto", new {@class="form-control"}  )
+       
+    </div>
+    <button type="submit" class="btn btn-primary">Elegir</button>   
+
+}
+

@@ -1,0 +1,77 @@
+﻿@model PruebaGetVehiculos.Models.Cliente
+@{
+    ViewBag.Title = "MostrarAutoElegido";
+}
+
+<h2>Cliente</h2>
+
+<html>
+<body>
+
+    @if (Model == null)
+    {
+        <h3>No hay Clientes con este auto como principal</h3>
+    }
+
+    else
+    {
+
+
+            foreach (var v in Model.Vehiculos)
+            {
+                if (@Model.VehiculoPrincipalId == @v.VehiculoId)
+                {
+                    <table class="table">
+                        <thead class="table table-hover">
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Modelo</th>
+                                <th>Patente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Model.Nombre</th>
+                                <th>@v.Modelo</th>
+                                <th>@v.Patente</th>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+            }
+
+        }
+
+        if(Model.Vehiculos.Count > 1)
+        {
+            <h3>Otros autos de @Model.Nombre</h3>
+            <table class="table">
+                <thead class="table table-hover">
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Patente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var auto in Model.Vehiculos)
+                    {
+                        if(Model.VehiculoPrincipalId != auto.VehiculoId)
+                        {
+                            <tr>
+                                <th>@auto.Modelo</th>
+                                <th>@auto.Patente</th>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                
+            </table>
+
+        }
+        
+
+    }
+
+
+</body>
+</html>
