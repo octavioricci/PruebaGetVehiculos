@@ -43,6 +43,26 @@ namespace PruebaGetVehiculos.Controllers
             return View(viewModel);
         }
 
+        public ActionResult ChooseClient()
+        {
+            var clientes = db.Clientes.Include(x => x.Vehiculos).ToList();
+            var model = new ClientesViewModel
+            {
+                Clientes = clientes
+
+            };
+
+            return PartialView(model);
+        }
+
+
+        public ActionResult ClientChosen(string clienteElegido)
+        {
+            
+            return PartialView(clienteElegido);
+
+        }
+
         [HttpPost]
         public ActionResult Traer(VehiculosViewModel model)
         {

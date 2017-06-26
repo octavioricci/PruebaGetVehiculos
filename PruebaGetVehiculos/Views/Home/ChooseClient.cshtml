@@ -1,0 +1,55 @@
+﻿@model PruebaGetVehiculos.ViewModel.ClientesViewModel
+
+
+@{
+    ViewBag.Title = "Choose Car";
+    Layout = "~/Views/Shared/_Simple.cshtml";
+}
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#Cliente_ClienteId').change(function() {
+
+                $.ajax({
+                    type: "GET",
+                    data: { clienteElegido: $('#Cliente_ClienteId').val() },
+                    url: '@Url.Action("ClientChosen","Home")',
+                    succes: function (result) {
+                        alert("Devolvio");
+                        $('#container-clientes').html(result);
+                        
+                    },
+                    error: function (jqXHR, textStatus, errorThrow) {
+                        alert(jqXHR.status);
+                        alert(errorThrow);
+                    }
+
+
+
+                });
+
+            });
+
+        });
+
+
+
+    </script>
+
+
+<h2>Elija Cliente</h2>
+
+@using (Html.BeginForm("TraerCliente", "Home"))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.Cliente.ClienteId)
+        @Html.DropDownListFor(x => x.Cliente.ClienteId, new SelectList(Model.Clientes, "ClienteId", "Nombre"), "Seleccione Cliente" , new { @class="form-control"})
+    </div>
+    
+}
+
+<div id="container-clientes">
+
+</div>
