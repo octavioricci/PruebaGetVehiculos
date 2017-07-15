@@ -42,6 +42,7 @@
 
         }
 
+        @* Pregunto Si la persona tiene mas de un vehículo*@
         if(Model.Vehiculos.Count > 1)
         {
             <h3>Otros autos de @Model.Nombre</h3>
@@ -55,6 +56,7 @@
                 <tbody>
                     @foreach(var auto in Model.Vehiculos)
                     {
+                        @* Listo los autos que tiene la persona MENOS el vehículo principal*@
                         if(Model.VehiculoPrincipalId != auto.VehiculoId)
                         {
                             <tr>
